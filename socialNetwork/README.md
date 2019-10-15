@@ -50,23 +50,41 @@ cd wrk2
 make
 ```
 
-#### Compose posts
+#### Compose posts -- docker-compose
 ```bash
 cd wrk2
-./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/compose-post.lua http://localhost:8082/wrk2-api/post/compose -R <reqs-per-sec>
+./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/compose-post.lua http://10.0.0.6:8082/wrk2-api/post/compose -R <reqs-per-sec>
 ```
 
-#### Read home timelines
+#### Compose posts -- kubernetes
+```bash
+cd wrk2
+./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/compose-post.lua http://10.68.184.173:8080/wrk2-api/post/compose -R <reqs-per-sec>
+```
+
+#### Read home timelines -- docker-compose
 ```bash
 cd wrk2
 ./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/read-home-timeline.lua http://localhost:8082/wrk2-api/home-timeline/read -R <reqs-per-sec>
 ```
+#### Read home timelines -- kubernetes
+```bash
+cd wrk2
+./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/read-home-timeline.lua http://10.68.184.173:8080/wrk2-api/home-timeline/read -R <reqs-per-sec>
+```
 
-#### Read user timelines
+#### Read user timelines -- docker-compose
 ```bash
 cd wrk2
 ./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/read-user-timeline.lua http://localhost:8082/wrk2-api/user-timeline/read -R <reqs-per-sec>
 ```
+
+#### Read user timelines -- kubernetes
+```bash
+cd wrk2
+./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/social-network/read-user-timeline.lua http://10.68.184.173:8080/wrk2-api/user-timeline/read -R <reqs-per-sec>
+```
+
 
 #### View Jaeger traces
 View Jaeger traces by accessing `http://localhost:16686`
