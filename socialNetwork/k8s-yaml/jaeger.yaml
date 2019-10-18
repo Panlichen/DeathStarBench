@@ -51,6 +51,7 @@ metadata:
   labels:
     death-star-project: social-network
     app-name: jaeger
+  namespace: social-network
 spec:
   replicas: 1
   selector:
