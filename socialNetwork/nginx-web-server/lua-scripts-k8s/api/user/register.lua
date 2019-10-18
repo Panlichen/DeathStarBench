@@ -23,18 +23,17 @@ function _M.RegisterUser()
   local post = ngx.req.get_post_args()
 
   if (_StrIsEmpty(post.first_name) or _StrIsEmpty(post.last_name) or
-      _StrIsEmpty(post.username) or _StrIsEmpty(post.password) or
-      _StrIsEmpty(post.user_id)) then
+      _StrIsEmpty(post.username) or _StrIsEmpty(post.password)) then
     ngx.status = ngx.HTTP_BAD_REQUEST
     ngx.say("Incomplete arguments")
     ngx.log(ngx.ERR, "Incomplete arguments")
     ngx.exit(ngx.HTTP_BAD_REQUEST)
   end
 
-  local client = GenericObjectPool:connection(UserServiceClient, "user-service", 9090)
+  local client = GenericObjectPool:connection(UserServiceClient, "user-service.default.svc.cluster.local", 9090)
 
-  local status, err = pcall(client.RegisterUserWithId, client, req_id, post.first_name,
-      post.last_name, post.username, post.password, tonumber(post.user_id), carrier)
+  local status, err = pcall(client.RegisterUser, client, req_id, post.first_name,
+      post.last_name, post.username, post.password, carrier)
   GenericObjectPool:returnConnection(client)
 
   if not status then

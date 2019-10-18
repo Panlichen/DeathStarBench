@@ -48,13 +48,14 @@ function _M.ReadUserTimeline()
   local GenericObjectPool = require "GenericObjectPool"
   local UserTimelineServiceClient = require "social_network_UserTimelineService"
   local cjson = require "cjson"
+  local jwt = require "resty.jwt"
   local liblualongnumber = require "liblualongnumber"
 
   local req_id = tonumber(string.sub(ngx.var.request_id, 0, 15), 16)
   local tracer = bridge_tracer.new_from_global()
   local parent_span_context = tracer:binary_extract(
       ngx.var.opentracing_binary_context)
-  local span = tracer:start_span("ReadUserTimeline",
+  local span = tracer:start_span("Login",
       {["references"] = {{"child_of", parent_span_context}}})
   local carrier = {}
   tracer:text_map_inject(span:context(), carrier)
@@ -62,34 +63,55 @@ function _M.ReadUserTimeline()
   ngx.req.read_body()
   local args = ngx.req.get_uri_args()
 
-  if (_StrIsEmpty(args.user_id) or _StrIsEmpty(args.start) or _StrIsEmpty(args.stop)) then
+  if (_StrIsEmpty(args.start) or _StrIsEmpty(args.stop)) then
     ngx.status = ngx.HTTP_BAD_REQUEST
     ngx.say("Incomplete arguments")
     ngx.log(ngx.ERR, "Incomplete arguments")
     ngx.exit(ngx.HTTP_BAD_REQUEST)
   end
 
+  if (_StrIsEmpty(ngx.var.cookie_login_token)) then
+    ngx.status = ngx.HTTP_UNAUTHORIZED
+    ngx.exit(ngx.HTTP_OK)
+  end
 
-  local client = GenericObjectPool:connection(
-      UserTimelineServiceClient, "user-timeline-service", 9090)
-  local status, ret = pcall(client.ReadUserTimeline, client, req_id,
-      tonumber(args.user_id), tonumber(args.start), tonumber(args.stop), carrier)
-  GenericObjectPool:returnConnection(client)
-  if not status then
-    ngx.status = ngx.HTTP_INTERNAL_SERVER_ERROR
-    if (ret.message) then
-      ngx.say("Get user-timeline failure: " .. ret.message)
-      ngx.log(ngx.ERR, "Get user-timeline failure: " .. ret.message)
-    else
-      ngx.say("Get user-timeline failure: " .. ret.message)
-      ngx.log(ngx.ERR, "Get user-timeline failure: " .. ret.message)
-    end
-    ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
+  local login_obj = jwt:verify(ngx.shared.config:get("secret"), ngx.var.cookie_login_token)
+  if not login_obj["verified"] then
+    ngx.status = ngx.HTTP_UNAUTHORIZED
+    ngx.say(login_obj.reason);
+    ngx.exit(ngx.HTTP_OK)
+  end
+
+  local timestamp = tonumber(login_obj["payload"]["timestamp"])
+  local ttl = tonumber(login_obj["payload"]["ttl"])
+  local user_id = tonumber(login_obj["payload"]["user_id"])
+
+  if (timestamp + ttl < ngx.time()) then
+    ngx.status = ngx.HTTP_UNAUTHORIZED
+    ngx.header.content_type = "text/plain"
+    ngx.say("Login token expired, please log in again")
+    ngx.exit(ngx.HTTP_OK)
   else
-    local user_timeline = _LoadTimeline(ret)
-    ngx.header.content_type = "application/json; charset=utf-8"
-    ngx.say(cjson.encode(user_timeline) )
-
+    local client = GenericObjectPool:connection(
+        UserTimelineServiceClient, "user-timeline-service.default.svc.cluster.local", 9090)
+    local status, ret = pcall(client.ReadUserTimeline, client, req_id,
+        user_id, tonumber(args.start), tonumber(args.stop), carrier)
+    GenericObjectPool:returnConnection(client)
+    if not status then
+      ngx.status = ngx.HTTP_INTERNAL_SERVER_ERROR
+      if (ret.message) then
+        ngx.say("Get user-timeline failure: " .. ret.message)
+        ngx.log(ngx.ERR, "Get user-timeline failure: " .. ret.message)
+      else
+        ngx.say("Get user-timeline failure: " .. ret.message)
+        ngx.log(ngx.ERR, "Get user-timeline failure: " .. ret.message)
+      end
+      ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
+    else
+      local user_timeline = _LoadTimeline(ret)
+      ngx.header.content_type = "application/json; charset=utf-8"
+      ngx.say(cjson.encode(user_timeline) )
+    end
   end
 end
 

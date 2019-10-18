@@ -57,7 +57,7 @@ spec:
       volumes:
       - name: lua-scripts
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/nginx-web-server/lua-scripts
+          path: /root/DeathStarBench/socialNetwork/nginx-web-server/lua-scripts-k8s
           type: Directory
       - name: pages
         hostPath: 
@@ -65,7 +65,7 @@ spec:
           type: Directory
       - name: nginx-conf
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/nginx-web-server/conf/nginx.conf
+          path: /root/DeathStarBench/socialNetwork/nginx-web-server/conf/nginx-k8s.conf
           type: File
       - name: jaeger-config-json
         hostPath: 

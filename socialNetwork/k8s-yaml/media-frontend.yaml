@@ -51,9 +51,9 @@ spec:
       volumes:
       - name: lua-scripts
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/media-frontend/lua-scripts
+          path: /root/DeathStarBench/socialNetwork/media-frontend/lua-scripts-k8s
           type: Directory
       - name: nginx-conf
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx.conf
+          path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx-k8s.conf
           type: File
