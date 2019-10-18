@@ -6,6 +6,7 @@ metadata:
   labels:
     death-star-project: social-network
     app-name: home-timeline-redis
+  namespace: social-network
 spec:
   ports:
   - port: 6379
@@ -20,6 +21,7 @@ metadata:
   labels:
     death-star-project: social-network
     app-name: home-timeline-redis
+  namespace: social-network
 spec:
   replicas: 1
   selector:
