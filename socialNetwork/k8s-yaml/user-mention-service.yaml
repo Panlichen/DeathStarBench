@@ -33,10 +33,16 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: user-mention-service
+        OUTPUT1: user-mongodb
+        OUTPUT2: user-memcached
+        OUTPUT3: compose-post-service
+        INPUT: text-service
       name: user-mention-service
     spec:
       containers:
       - name: user-mention-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["UserMentionService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

@@ -40,14 +40,18 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: write-home-timeline-rabbitmq
+        OUTPUT: write-home-timeline-service
+        INPUT: compose-post-service
       name: write-home-timeline-rabbitmq
     spec:
       containers:
       - name: write-home-timeline-rabbitmq
-        image: rabbitmq
+        image: poanpan/rabbitmq:v1
         env:
         - name: RABBITMQ_ERLANG_COOKIE
           value: "WRITE-HOME-TIMELINE-RABBITMQ"
         - name: RABBITMQ_DEFAULT_VHOST
           value: "/"
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

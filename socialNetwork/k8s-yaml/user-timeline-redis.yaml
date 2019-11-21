@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: user-timeline-redis
+        INPUT: user-timeline-service
       name: user-timeline-redis
     spec:
       containers:
       - name: user-timeline-redis
-        image: redis
+        image: redis:alpine
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

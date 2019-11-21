@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: post-storage-memcached
+        INPUT: post-storage-service
       name: post-storage-memcached
     spec:
       containers:
       - name: post-storage-memcached
-        image: memcached
+        image: poanpan/memcached:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

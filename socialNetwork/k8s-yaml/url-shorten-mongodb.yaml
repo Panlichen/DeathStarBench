@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: url-shorten-mongodb
+        INPUT: url-shorten-service
       name: url-shorten-mongodb
     spec:
       containers:
       - name: url-shorten-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

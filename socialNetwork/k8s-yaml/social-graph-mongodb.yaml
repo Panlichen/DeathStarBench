@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: social-graph-mongodb
+        INPUT: social-graph-service
       name: social-graph-mongodb
     spec:
       containers:
       - name: social-graph-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

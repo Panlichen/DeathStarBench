@@ -37,5 +37,5 @@ spec:
     spec:
       containers:
       - name: movie-info-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always

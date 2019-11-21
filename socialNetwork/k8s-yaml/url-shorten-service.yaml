@@ -33,10 +33,15 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: url-shorten-service
+        OUTPUT1: url-shorten-mongodb
+        OUTPUT2: compose-post-service
+        INPUT: text-service
       name: url-shorten-service
     spec:
       containers:
       - name: url-shorten-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["UrlShortenService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

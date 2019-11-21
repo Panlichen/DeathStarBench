@@ -31,9 +31,9 @@ request = function()
   local username = "username_" .. tostring(user_index)
   local user_id = tostring(user_index)
   local text = stringRandom(256)
-  local num_user_mentions = math.random(0, 5)
-  local num_urls = math.random(0, 5)
-  local num_media = math.random(0, 4)
+  local num_user_mentions = math.random(2, 5)
+  local num_urls = math.random(2, 5)
+  local num_media = math.random(2, 4)
   local media_ids = '['
   local media_types = '['
 
@@ -63,7 +63,7 @@ request = function()
 
   local method = "POST"
   -- Use your cluster-ip here:
-  local path = "http://10.68.39.88:8080/wrk2-api/post/compose"
+  local path = "http://10.68.216.67:8080/wrk2-api/post/compose"
   local headers = {}
   local body
   headers["Content-Type"] = "application/x-www-form-urlencoded"

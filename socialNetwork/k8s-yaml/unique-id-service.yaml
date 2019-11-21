@@ -33,10 +33,14 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: unique-id-service
+        OUTPUT: compose-post-service
+        INPUT: nginx-thrift
       name: unique-id-service
     spec:
       containers:
       - name: unique-id-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["UniqueIdService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

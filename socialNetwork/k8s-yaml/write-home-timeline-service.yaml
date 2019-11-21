@@ -35,10 +35,16 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: write-home-timeline-service
+        OUTPUT1: social-graph-service
+        OUTPUT2: home-timeline-redis
+        INPUT: write-home-timeline-rabbitmq
       name: write-home-timeline-service
     spec:
       containers:
       - name: write-home-timeline-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["WriteHomeTimelineService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      # TODO: need init-container
+      schedulerName: poseidon

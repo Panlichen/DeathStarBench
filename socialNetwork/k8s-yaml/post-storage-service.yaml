@@ -33,12 +33,19 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: post-storage-service
+        OUTPUT1: post-storage-memcached
+        OUTPUT2: post-storage-mongodb
+        INPUT1: compose-post-service
+        INPUT2: home-timeline-service
+        INPUT3: user-timeline-service
       name: post-storage-service
     spec:
       containers:
       - name: post-storage-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["PostStorageService"]
         ports: 
         - containerPort: 9090
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

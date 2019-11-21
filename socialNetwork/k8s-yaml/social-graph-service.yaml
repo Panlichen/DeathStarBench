@@ -33,10 +33,19 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: social-graph-service
+        OUTPUT1: user-service
+        OUTPUT2: home-timeline-redis
+        OUTPUT3: social-graph-redis
+        OUTPUT4: social-graph-mongodb
+        INPUT1: nginx-thrift
+        INPUT2: user-service
+        INPUT3: write-home-timeline-service
       name: social-graph-service
     spec:
       containers:
       - name: social-graph-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["SocialGraphService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

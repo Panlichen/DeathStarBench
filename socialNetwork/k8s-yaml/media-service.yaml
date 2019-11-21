@@ -33,10 +33,14 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: media-service
+        OUTPUT: compose-post-service
+        INPUT: nginx-thrift
       name: media-service
     spec:
       containers:
       - name: media-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["MediaService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

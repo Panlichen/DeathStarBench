@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: user-timeline-mongodb
+        INPUT: user-timeline-service
       name: user-timeline-mongodb
     spec:
       containers:
       - name: user-timeline-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

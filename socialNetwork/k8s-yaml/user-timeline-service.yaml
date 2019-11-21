@@ -33,10 +33,17 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: user-timeline-service
+        OUTPUT1: post-storage-service
+        OUTPUT2: user-timeline-mongodb
+        OUTPUT3: user-timeline-redis
+        INPUT1: compose-post-service
+        INPUT2: nginx-thrift
       name: user-timeline-service
     spec:
       containers:
       - name: user-timeline-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["UserTimelineService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

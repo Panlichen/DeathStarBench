@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: post-storage-mongodb
+        INPUT: post-storage-service
       name: post-storage-mongodb
     spec:
       containers:
       - name: post-storage-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

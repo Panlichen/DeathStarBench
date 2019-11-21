@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: social-graph-redis
+        INPUT: social-graph-service
       name: social-graph-redis
     spec:
       containers:
       - name: social-graph-redis
-        image: redis
+        image: redis:alpine
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

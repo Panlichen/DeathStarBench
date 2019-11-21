@@ -35,10 +35,22 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: compose-post-service
+        OUTPUT1: write-home-timeline-rabbitmq
+        OUTPUT2: post-storage-service
+        OUTPUT3: user-timeline-service
+        OUTPUT4: compose-post-redis
+        INPUT1: user-mention-service
+        INPUT2: text-service
+        INPUT3: media-service
+        INPUT4: user-service
+        INPUT5: url-shorten-service
+        INPUT6: unique-id-service
       name: compose-post-service
     spec:
       containers:
       - name: compose-post-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["ComposePostService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

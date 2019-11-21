@@ -33,10 +33,18 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: user-service
+        OUTPUT1: social-graph-service
+        OUTPUT2: user-mongodb
+        OUTPUT3: user-memcached
+        OUTPUT4: compose-post-service
+        INPUT1: social-graph-service
+        INPUT2: nginx-thrift
       name: user-service
     spec:
       containers:
       - name: user-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["UserService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

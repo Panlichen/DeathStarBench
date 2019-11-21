@@ -37,5 +37,5 @@ spec:
     spec:
       containers:
       - name: plot-mongodb
-        image: mongo
+        image: poanpan/mongo:v1
       restartPolicy: Always

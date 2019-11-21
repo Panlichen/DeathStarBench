@@ -33,9 +33,12 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: compose-post-redis
+        INPUT: compose-post-service
       name: compose-post-redis
     spec:
       containers:
       - name: compose-post-redis
-        image: redis
+        image: redis:alpine
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

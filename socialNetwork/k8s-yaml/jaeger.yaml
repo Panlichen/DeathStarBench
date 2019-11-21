@@ -67,8 +67,10 @@ spec:
     spec:
       containers:
       - name: jaeger
-        image: jaegertracing/all-in-one:latest
+        image: poanpan/jaegertracing:v1
         env:
         - name: COLLECTOR_ZIPKIN_HTTP_PORT
           value: "9411"
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

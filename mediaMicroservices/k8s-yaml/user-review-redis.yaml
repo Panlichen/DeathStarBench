@@ -37,5 +37,5 @@ spec:
     spec:
       containers:
       - name: user-review-redis
-        image: redis
+        image: redis:alpine
       restartPolicy: Always

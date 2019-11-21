@@ -57,3 +57,5 @@ spec:
         hostPath: 
           path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx-k8s.conf
           type: File
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

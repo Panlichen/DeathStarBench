@@ -37,5 +37,7 @@ spec:
     spec:
       containers:
       - name: media-memcached
-        image: memcached
+        image: poanpan/memcached:v1
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

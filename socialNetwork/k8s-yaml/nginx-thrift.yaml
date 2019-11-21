@@ -35,6 +35,13 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: nginx-thrift
+        OUTPUT1: social-graph-service
+        OUTPUT2: text-service
+        OUTPUT3: media-service
+        OUTPUT4: home-timeline-service
+        OUTPUT5: user-service
+        OUTPUT6: unique-id-service
+        OUTPUT7: user-timeline-service
       name: nginx-thrift
     spec:
       containers:
@@ -75,3 +82,5 @@ spec:
         hostPath: 
           path: /root/DeathStarBench/socialNetwork/gen-lua
           type: Directory
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

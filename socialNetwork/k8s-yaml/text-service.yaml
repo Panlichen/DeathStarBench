@@ -33,10 +33,16 @@ spec:
       labels: 
         death-star-project: social-network
         app-name: text-service
+        OUTPUT1: url-shorten-service
+        OUTPUT2: user-mention-service
+        OUTPUT3: compose-post-service
+        INPUT: nginx-thrift
       name: text-service
     spec:
       containers:
       - name: text-service
-        image: yg397/social-network-microservices
+        image: poanpan/social-network-microservices:v1
         command: ["TextService"]
       restartPolicy: Always
+      # nodeName: 10.0.0.13
+      schedulerName: poseidon

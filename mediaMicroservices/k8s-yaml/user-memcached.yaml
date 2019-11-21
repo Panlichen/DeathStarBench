@@ -37,5 +37,5 @@ spec:
     spec:
       containers:
       - name: user-memcached
-        image: memcached
+        image: poanpan/memcached:v1
       restartPolicy: Always
