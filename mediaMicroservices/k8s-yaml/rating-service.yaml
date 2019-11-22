@@ -33,6 +33,9 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: rating-service
+        OUTPUT1: compose-review-service
+        OUTPUT2: rating-redis
+        INPUT: movie-id-service
       name: rating-service
     spec:
       containers:
@@ -40,3 +43,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["RatingService"]
       restartPolicy: Always
+      schedulerName: poseidon

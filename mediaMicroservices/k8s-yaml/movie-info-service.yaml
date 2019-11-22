@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: movie-info-service
+        OUTPUT: movie-info-mongodb
+        INPUT: nginx-web-server
       name: movie-info-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["MovieInfoService"]
       restartPolicy: Always
+      schedulerName: poseidon

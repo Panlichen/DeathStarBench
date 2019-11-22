@@ -75,4 +75,4 @@ spec:
         ports: 
         - containerPort: 16686
       restartPolicy: Always
-      
+      schedulerName: poseidon

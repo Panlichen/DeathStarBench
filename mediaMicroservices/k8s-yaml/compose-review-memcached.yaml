@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: compose-review-memcached
+        INPUT: compose-review-service
       name: compose-review-memcached
     spec:
       containers:
       - name: compose-review-memcached
         image: poanpan/memcached:v1
       restartPolicy: Always
+      schedulerName: poseidon

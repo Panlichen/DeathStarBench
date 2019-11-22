@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: text-service
+        OUTPUT: compose-review-service
+        INPUT: nginx-web-server
       name: text-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["TextService"]
       restartPolicy: Always
+      schedulerName: poseidon

@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: unique-id-service
+        OUTPUT: compose-review-service
+        INPUT: nginx-web-server
       name: unique-id-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["UniqueIdService"]
       restartPolicy: Always
+      schedulerName: poseidon

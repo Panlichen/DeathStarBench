@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: review-storage-service
+        OUTPUT: review-storage-mongodb
+        INPUT: compose-review-service
       name: review-storage-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["ReviewStorageService"]
       restartPolicy: Always
+      schedulerName: poseidon

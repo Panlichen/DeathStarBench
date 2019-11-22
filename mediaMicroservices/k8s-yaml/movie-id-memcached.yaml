@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: movie-id-memcached
+        INPUT: movie-id-service
       name: movie-id-memcached
     spec:
       containers:
       - name: movie-id-memcached
         image: poanpan/memcached:v1
       restartPolicy: Always
+      schedulerName: poseidon

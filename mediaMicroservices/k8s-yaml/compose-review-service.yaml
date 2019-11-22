@@ -33,6 +33,15 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: compose-review-service
+        OUTPUT1: compose-review-memcached
+        OUTPUT2: review-storage-service
+        OUTPUT3: user-review-service
+        OUTPUT4: movie-review-service
+        INPUT1: text-service
+        INPUT2: movie-id-service
+        INPUT3: unique-id-service
+        INPUT4: rating-service
+        INPUT5: user-service
       name: compose-review-service
     spec:
       containers:
@@ -40,3 +49,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["ComposeReviewService"]
       restartPolicy: Always
+      schedulerName: poseidon

@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: cast-info-service
+        OUTPUT: cast-info-mongodb
+        INPUT: nginx-web-server
       name: cast-info-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["CastInfoService"]
       restartPolicy: Always
+      schedulerName: poseidon

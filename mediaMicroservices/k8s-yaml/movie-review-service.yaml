@@ -33,6 +33,9 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: movie-review-service
+        OUTPUT1: movie-review-redis
+        OUTPUT2: movie-review-mongodb
+        INPUT: compose-review-service
       name: movie-review-service
     spec:
       containers:
@@ -40,3 +43,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["MovieReviewService"]
       restartPolicy: Always
+      schedulerName: poseidon

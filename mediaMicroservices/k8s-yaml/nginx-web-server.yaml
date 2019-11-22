@@ -34,6 +34,13 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: nginx-web-server
+        OUTPUT1: text-service
+        OUTPUT2: movie-id-service
+        OUTPUT3: unique-id-service
+        OUTPUT4: movie-info-service
+        OUTPUT5: plot-service
+        OUTPUT6: cast-info-service
+        OUTPUT7: user-service
       name: nginx-web-server
     spec:
       containers:
@@ -66,3 +73,4 @@ spec:
         hostPath: 
           path: /root/DeathStarBench/mediaMicroservices/gen-lua
           type: Directory
+      schedulerName: poseidon

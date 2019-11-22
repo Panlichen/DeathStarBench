@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: user-review-redis
+        INPUT: user-review-service
       name: user-review-redis
     spec:
       containers:
       - name: user-review-redis
         image: redis:alpine
       restartPolicy: Always
+      schedulerName: poseidon

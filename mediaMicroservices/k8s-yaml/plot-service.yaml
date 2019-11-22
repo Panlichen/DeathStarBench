@@ -33,6 +33,8 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: plot-service
+        OUTPUT: plot-mongodb
+        INPUT: nginx-web-server
       name: plot-service
     spec:
       containers:
@@ -40,3 +42,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["PlotService"]
       restartPolicy: Always
+      schedulerName: poseidon

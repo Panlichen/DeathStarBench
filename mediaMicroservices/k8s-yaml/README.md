@@ -26,14 +26,16 @@ Run `kubectl apply -f <path-of-repo>/mediaMicroservices/k8s-yaml/` and wait `kub
 
 #### Compose reviews
 
-Paste the cluster ip at `<path-of-repo>/mediaMicroservices/wrk2/scripts/media-microservices/compose-review.lua:1032`
+Paste the cluster ip at `<path-of-repo>/mediaMicroservices/wrk2/scripts/media-microservices/compose-review-tiny.lua:1032`
 
 Then
 
 ```bash
 cd <path-of-repo>/mediaMicroservices/wrk2
-./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/media-microservices/compose-review.lua http://<cluster-ip>:8080/wrk2-api/review/compose -R <reqs-per-sec>
+./wrk -D exp -t <num-threads> -c <num-conns> -d <duration> -L -s ./scripts/media-microservices/compose-review-tiny.lua http://<cluster-ip>:8080/wrk2-api/review/compose -R <reqs-per-sec>
 ```
+
+- `compose-review-tiny.lua` uses a subset of movies, excluding problematic movies in the original dataset.
 
 #### View Jaeger traces
 

@@ -33,6 +33,10 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: user-service
+        OUTPUT1: user-mongodb
+        OUTPUT2: compose-review-service
+        OUTPUT3: user-memcached
+        INPUT: nginx-web-server
       name: user-service
     spec:
       containers:
@@ -40,3 +44,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["UserService"]
       restartPolicy: Always
+      schedulerName: poseidon

@@ -33,6 +33,9 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: user-review-service
+        OUTPUT1: user-review-redis
+        OUTPUT2: user-review-mongodb
+        INPUT: compose-review-service
       name: user-review-service
     spec:
       containers:
@@ -40,3 +43,4 @@ spec:
         image: poanpan/media-microservices:v1
         command: ["UserReviewService"]
       restartPolicy: Always
+      schedulerName: poseidon

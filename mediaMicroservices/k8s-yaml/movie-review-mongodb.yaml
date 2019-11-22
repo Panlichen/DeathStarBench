@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: movie-review-mongodb
+        INPUT: movie-review-service
       name: movie-review-mongodb
     spec:
       containers:
       - name: movie-review-mongodb
         image: poanpan/mongo:v1
       restartPolicy: Always
+      schedulerName: poseidon

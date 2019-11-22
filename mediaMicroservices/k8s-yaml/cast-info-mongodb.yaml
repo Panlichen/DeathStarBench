@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: cast-info-mongodb
+        INPUT: cast-info-service
       name: cast-info-mongodb
     spec:
       containers:
       - name: cast-info-mongodb
         image: poanpan/mongo:v1
       restartPolicy: Always
+      schedulerName: poseidon

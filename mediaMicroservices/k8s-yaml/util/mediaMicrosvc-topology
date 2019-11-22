@@ -1,0 +1,94 @@
+nginx-web-server
+    # write_cast
+    cast-info-service
+        cast-info-mongodb
+    # write_movie
+    movie-info-service
+        movie-info-mongodb
+    plot-service
+        plot-mongodb
+    movie-id-service
+        movie-id-mongodb
+    # register user
+    user-service
+        user-mongodb
+
+    # post
+    user-service
+        user-memcached
+        user-mongodb
+        compose-review-service
+            compose-review-memcached
+            [_ComposeAndUpload]
+            compose-review-memcached
+            review-storage-service
+                review-storage-mongodb
+            user-review-service
+                user-review-mongodb
+                user-review-redis
+            movie-review-service
+                movie-review-mongodb
+                movie-review-redis
+
+    movie-id-service
+        movie-id-memcached
+        movie-id-mongodb
+        compose-review-service
+            compose-review-memcached
+            [_ComposeAndUpload]
+            compose-review-memcached
+            review-storage-service
+                review-storage-mongodb
+            user-review-service
+                user-review-mongodb
+                user-review-redis
+            movie-review-service
+                movie-review-mongodb
+                movie-review-redis
+
+        rating-service
+            compose-review-service
+                compose-review-memcached
+                [_ComposeAndUpload]
+                compose-review-memcached
+                review-storage-service
+                    review-storage-mongodb
+                user-review-service
+                    user-review-mongodb
+                    user-review-redis
+                movie-review-service
+                    movie-review-mongodb
+                    movie-review-redis
+            rating-redis
+            
+
+    text-service
+        compose-review-service
+            compose-review-memcached
+            [_ComposeAndUpload]
+            compose-review-memcached
+            review-storage-service
+                review-storage-mongodb
+            user-review-service
+                user-review-mongodb
+                user-review-redis
+            movie-review-service
+                movie-review-mongodb
+                movie-review-redis
+
+    unique-id-service
+        compose-review-service
+            compose-review-memcached
+            [_ComposeAndUpload]
+            compose-review-memcached
+            review-storage-service
+                review-storage-mongodb
+            user-review-service
+                user-review-mongodb
+                user-review-redis
+            movie-review-service
+                movie-review-mongodb
+                movie-review-redis
+
+
+

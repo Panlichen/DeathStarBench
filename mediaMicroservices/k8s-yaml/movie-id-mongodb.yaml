@@ -33,9 +33,11 @@ spec:
       labels: 
         death-star-project: media-microsvc
         app-name: movie-id-mongodb
+        INPUT: movie-id-service
       name: movie-id-mongodb
     spec:
       containers:
       - name: movie-id-mongodb
         image: poanpan/mongo:v1
       restartPolicy: Always
+      schedulerName: poseidon

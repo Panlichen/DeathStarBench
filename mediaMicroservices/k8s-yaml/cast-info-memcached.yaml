@@ -39,3 +39,4 @@ spec:
       - name: cast-info-memcached
         image: poanpan/memcached:v1
       restartPolicy: Always
+      schedulerName: poseidon
