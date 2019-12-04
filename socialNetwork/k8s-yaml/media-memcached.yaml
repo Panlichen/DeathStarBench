@@ -38,6 +38,10 @@ spec:
       containers:
       - name: media-memcached
         image: poanpan/memcached:v1
+        resources: 
+          requests: 
+            cpu: "10m"
+            memory: "10Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

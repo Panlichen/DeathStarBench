@@ -39,6 +39,10 @@ spec:
       containers:
       - name: user-timeline-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "1600m"
+            memory: "1Gi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

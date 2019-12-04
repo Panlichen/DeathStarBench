@@ -41,5 +41,9 @@ spec:
       - name: text-service
         image: poanpan/media-microservices:v1
         command: ["TextService"]
+        resources: 
+          requests: 
+            cpu: "200m"
+            memory: "12Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

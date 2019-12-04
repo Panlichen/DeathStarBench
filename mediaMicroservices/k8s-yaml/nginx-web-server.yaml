@@ -55,6 +55,10 @@ spec:
           name: jaeger-config-json
         - mountPath: /gen-lua
           name: gen-lua
+        resources: 
+          requests: 
+            cpu: "600m"
+            memory: "40Mi"
       restartPolicy: Always
       volumes:
       - name: lua-scripts
@@ -73,4 +77,4 @@ spec:
         hostPath: 
           path: /root/DeathStarBench/mediaMicroservices/gen-lua
           type: Directory
-      schedulerName: poseidon
+      # schedulerName: poseidon

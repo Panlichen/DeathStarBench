@@ -39,6 +39,10 @@ spec:
       containers:
       - name: social-graph-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "600m"
+            memory: "300Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

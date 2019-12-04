@@ -39,5 +39,9 @@ spec:
       containers:
       - name: plot-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "20m"
+            memory: "130Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

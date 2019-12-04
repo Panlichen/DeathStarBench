@@ -39,6 +39,10 @@ spec:
       containers:
       - name: compose-post-redis
         image: redis:alpine
+        resources: 
+          requests: 
+            cpu: "1600m"
+            memory: "8Gi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

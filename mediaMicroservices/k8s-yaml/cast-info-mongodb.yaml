@@ -39,5 +39,9 @@ spec:
       containers:
       - name: cast-info-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "150m"
+            memory: "140Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

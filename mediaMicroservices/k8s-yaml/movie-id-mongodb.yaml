@@ -39,5 +39,9 @@ spec:
       containers:
       - name: movie-id-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "20m"
+            memory: "120Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

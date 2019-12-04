@@ -39,6 +39,10 @@ spec:
       containers:
       - name: url-shorten-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "700m"
+            memory: "3.2Gi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

@@ -41,6 +41,10 @@ spec:
       - name: unique-id-service
         image: poanpan/social-network-microservices:v1
         command: ["UniqueIdService"]
+        resources: 
+          requests: 
+            cpu: "5m"
+            memory: "70Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

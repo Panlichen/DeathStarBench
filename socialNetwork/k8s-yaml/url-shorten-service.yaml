@@ -42,6 +42,10 @@ spec:
       - name: url-shorten-service
         image: poanpan/social-network-microservices:v1
         command: ["UrlShortenService"]
+        resources: 
+          requests: 
+            cpu: "12m"
+            memory: "30Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

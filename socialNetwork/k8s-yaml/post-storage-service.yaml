@@ -46,6 +46,10 @@ spec:
         command: ["PostStorageService"]
         ports: 
         - containerPort: 9090
+        resources: 
+          requests: 
+            cpu: "3000m"
+            memory: "50Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

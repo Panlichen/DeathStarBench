@@ -41,5 +41,9 @@ spec:
       - name: cast-info-service
         image: poanpan/media-microservices:v1
         command: ["CastInfoService"]
+        resources: 
+          requests: 
+            cpu: "100m"
+            memory: "25Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

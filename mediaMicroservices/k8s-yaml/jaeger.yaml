@@ -74,5 +74,9 @@ spec:
           value: "9411"
         ports: 
         - containerPort: 16686
+        resources: 
+          requests: 
+            cpu: "500m"
+            memory: "2Gi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

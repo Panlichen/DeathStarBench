@@ -43,5 +43,9 @@ spec:
       - name: user-service
         image: poanpan/media-microservices:v1
         command: ["UserService"]
+        resources: 
+          requests: 
+            cpu: "300m"
+            memory: "20Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

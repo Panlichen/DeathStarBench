@@ -39,5 +39,9 @@ spec:
       containers:
       - name: user-review-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "400m"
+            memory: "400Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

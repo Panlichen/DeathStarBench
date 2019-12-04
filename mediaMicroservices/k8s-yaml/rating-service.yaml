@@ -42,5 +42,9 @@ spec:
       - name: rating-service
         image: poanpan/media-microservices:v1
         command: ["RatingService"]
+        resources: 
+          requests: 
+            cpu: "600m"
+            memory: "18Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

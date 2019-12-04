@@ -42,6 +42,10 @@ spec:
       - name: home-timeline-service
         image: poanpan/social-network-microservices:v1
         command: ["HomeTimelineService"]
+        resources: 
+          requests: 
+            cpu: "800m"
+            memory: "30Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

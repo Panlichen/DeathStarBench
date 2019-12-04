@@ -43,6 +43,10 @@ spec:
       - name: user-mention-service
         image: poanpan/social-network-microservices:v1
         command: ["UserMentionService"]
+        resources: 
+          requests: 
+            cpu: "900m"
+            memory: "24Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

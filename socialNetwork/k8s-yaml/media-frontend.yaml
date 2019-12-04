@@ -47,6 +47,10 @@ spec:
           name: lua-scripts
         - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
           name: nginx-conf
+        resources: 
+          requests: 
+            cpu: "5m"
+            memory: "20Mi"
       restartPolicy: Always
       volumes:
       - name: lua-scripts
@@ -58,4 +62,4 @@ spec:
           path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx-k8s.conf
           type: File
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

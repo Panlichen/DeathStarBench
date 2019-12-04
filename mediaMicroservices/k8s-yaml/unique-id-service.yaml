@@ -41,5 +41,9 @@ spec:
       - name: unique-id-service
         image: poanpan/media-microservices:v1
         command: ["UniqueIdService"]
+        resources: 
+          requests: 
+            cpu: "150m"
+            memory: "15Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

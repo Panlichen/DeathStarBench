@@ -40,6 +40,10 @@ spec:
       containers:
       - name: user-mongodb
         image: poanpan/mongo:v1
+        resources: 
+          requests: 
+            cpu: "300m"
+            memory: "120Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

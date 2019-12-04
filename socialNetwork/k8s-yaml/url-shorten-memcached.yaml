@@ -38,6 +38,10 @@ spec:
       containers:
       - name: url-shorten-memcached
         image: poanpan/memcached:v1
+        resources: 
+          requests: 
+            cpu: "5m"
+            memory: "6Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

@@ -6,7 +6,7 @@ do
 echo $file
 # sed '$a\ \ \ \ \ \ dnsPolicy: "Default"' $file | cat > a; mv a $file
 cat >> ../$file << EOF
-      schedulerName: poseidon
+      # schedulerName: poseidon
 EOF
 
 echo "======================="

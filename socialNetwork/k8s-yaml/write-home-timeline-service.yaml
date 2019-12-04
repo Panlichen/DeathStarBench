@@ -44,7 +44,11 @@ spec:
       - name: write-home-timeline-service
         image: poanpan/social-network-microservices:v1
         command: ["WriteHomeTimelineService"]
+        resources: 
+          requests: 
+            cpu: "1300m"
+            memory: "13Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
       # TODO: need init-container
-      schedulerName: poseidon
+      # schedulerName: poseidon

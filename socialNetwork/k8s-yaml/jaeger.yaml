@@ -71,6 +71,10 @@ spec:
         env:
         - name: COLLECTOR_ZIPKIN_HTTP_PORT
           value: "9411"
+        resources: 
+          requests: 
+            cpu: "1000m"
+            memory: "3Gi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

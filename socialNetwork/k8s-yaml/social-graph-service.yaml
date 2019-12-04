@@ -46,6 +46,10 @@ spec:
       - name: social-graph-service
         image: poanpan/social-network-microservices:v1
         command: ["SocialGraphService"]
+        resources: 
+          requests: 
+            cpu: "1500m"
+            memory: "400Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

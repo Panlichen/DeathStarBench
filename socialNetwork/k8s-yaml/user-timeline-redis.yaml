@@ -39,6 +39,10 @@ spec:
       containers:
       - name: user-timeline-redis
         image: redis:alpine
+        resources: 
+          requests: 
+            cpu: "150m"
+            memory: "15Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

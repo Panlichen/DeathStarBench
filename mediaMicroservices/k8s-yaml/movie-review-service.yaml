@@ -42,5 +42,9 @@ spec:
       - name: movie-review-service
         image: poanpan/media-microservices:v1
         command: ["MovieReviewService"]
+        resources: 
+          requests: 
+            cpu: "500m"
+            memory: "25Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

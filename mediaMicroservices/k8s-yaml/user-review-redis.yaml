@@ -39,5 +39,9 @@ spec:
       containers:
       - name: user-review-redis
         image: redis:alpine
+        resources: 
+          requests: 
+            cpu: "50m"
+            memory: "8Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

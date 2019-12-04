@@ -41,5 +41,9 @@ spec:
       - name: plot-service
         image: poanpan/media-microservices:v1
         command: ["PlotService"]
+        resources: 
+          requests: 
+            cpu: "10m"
+            memory: "13Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

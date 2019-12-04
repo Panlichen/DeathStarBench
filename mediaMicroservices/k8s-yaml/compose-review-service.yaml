@@ -48,5 +48,9 @@ spec:
       - name: compose-review-service
         image: poanpan/media-microservices:v1
         command: ["ComposeReviewService"]
+        resources: 
+          requests: 
+            cpu: "1300m"
+            memory: "34Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

@@ -52,6 +52,10 @@ spec:
           value: "WRITE-HOME-TIMELINE-RABBITMQ"
         - name: RABBITMQ_DEFAULT_VHOST
           value: "/"
+        resources: 
+          requests: 
+            cpu: "1000m"
+            memory: "400Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

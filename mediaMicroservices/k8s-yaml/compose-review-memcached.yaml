@@ -39,5 +39,9 @@ spec:
       containers:
       - name: compose-review-memcached
         image: poanpan/memcached:v1
+        resources: 
+          requests: 
+            cpu: "600m"
+            memory: "20Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

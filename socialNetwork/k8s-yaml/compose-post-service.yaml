@@ -51,6 +51,10 @@ spec:
       - name: compose-post-service
         image: poanpan/social-network-microservices:v1
         command: ["ComposePostService"]
+        resources: 
+          requests: 
+            cpu: "5000m"
+            memory: "200Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
-      schedulerName: poseidon
+      # schedulerName: poseidon

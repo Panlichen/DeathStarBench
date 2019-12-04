@@ -38,5 +38,9 @@ spec:
       containers:
       - name: cast-info-memcached
         image: poanpan/memcached:v1
+        resources: 
+          requests: 
+            cpu: "6m"
+            memory: "6Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

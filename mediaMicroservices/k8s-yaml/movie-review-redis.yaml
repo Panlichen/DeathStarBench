@@ -39,5 +39,9 @@ spec:
       containers:
       - name: movie-review-redis
         image: redis:alpine
+        resources: 
+          requests: 
+            cpu: "50m"
+            memory: "16Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon

@@ -41,5 +41,9 @@ spec:
       - name: review-storage-service
         image: poanpan/media-microservices:v1
         command: ["ReviewStorageService"]
+        resources: 
+          requests: 
+            cpu: "200m"
+            memory: "12Mi"
       restartPolicy: Always
-      schedulerName: poseidon
+      # schedulerName: poseidon
