@@ -12,6 +12,7 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
+    nodePort: 31000
   selector:
     death-star-project: social-network
     app-name: nginx-thrift

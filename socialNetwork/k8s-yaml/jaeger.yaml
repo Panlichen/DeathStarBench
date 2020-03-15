@@ -11,6 +11,7 @@ spec:
   type: NodePort
   ports:
   - port: 16686
+    nodePort: 31010
   selector:
     death-star-project: social-network
     app-name: jaeger
