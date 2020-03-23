@@ -21,6 +21,7 @@ spec:
         command:
         - sh
         - -c
+        # this should not work, but emmm somehow it works...
         - 'mkdir -p /usr/local/openresty/nginx && cp /root/DeathStarBench/socialNetwork/nginx-web-server/jaeger-config.json /usr/local/openresty/nginx/jaeger-config.json && while true; do date ; sleep $(($RANDOM % 5 + 5)); done'
         # - sh
         # - -c

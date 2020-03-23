@@ -18,6 +18,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: nginx-web-server
   namespace: media-microsvc
   labels:
@@ -48,33 +50,24 @@ spec:
         image: yg397/openresty-thrift:xenial
         volumeMounts:
         - mountPath: /usr/local/openresty/nginx/lua-scripts
-          name: lua-scripts
+          name: deathstar-nfs-pvc
+          subPath: mediaMicroservices/nginx-web-server/lua-scripts-k8s
         - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
-          name: nginx-conf
+          name: deathstar-nfs-pvc
+          subPath: mediaMicroservices/nginx-web-server/conf/nginx-k8s.conf
         - mountPath: /usr/local/openresty/nginx/jaeger-config.json
-          name: jaeger-config-json
+          name: deathstar-nfs-pvc
+          subPath: mediaMicroservices/nginx-web-server/jaeger-config.json
         - mountPath: /gen-lua
-          name: gen-lua
+          name: deathstar-nfs-pvc
+          subPath: mediaMicroservices/gen-lua
         resources: 
           requests: 
             cpu: "600m"
             memory: "40Mi"
       restartPolicy: Always
       volumes:
-      - name: lua-scripts
-        hostPath: 
-          path: /root/DeathStarBench/mediaMicroservices/nginx-web-server/lua-scripts-k8s
-          type: Directory
-      - name: nginx-conf
-        hostPath: 
-          path: /root/DeathStarBench/mediaMicroservices/nginx-web-server/conf/nginx-k8s.conf
-          type: File
-      - name: jaeger-config-json
-        hostPath: 
-          path: /root/DeathStarBench/mediaMicroservices/nginx-web-server/jaeger-config.json
-          type: File
-      - name: gen-lua
-        hostPath: 
-          path: /root/DeathStarBench/mediaMicroservices/gen-lua
-          type: Directory
+      - name: deathstar-nfs-pvc
+        persistentVolumeClaim:
+          claimName: deathstar-nfs-pvc
       # schedulerName: poseidon

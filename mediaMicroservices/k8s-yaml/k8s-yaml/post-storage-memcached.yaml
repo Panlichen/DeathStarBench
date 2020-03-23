@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: post-storage-memcached
+  labels:
+    death-star-project: social-network
+    app-name: post-storage-memcached
+  namespace: social-network
+spec:
+  ports:
+  - port: 11211
+  selector:
+    death-star-project: social-network
+    app-name: post-storage-memcached
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
+  name: post-storage-memcached
+  labels:
+    death-star-project: social-network
+    app-name: post-storage-memcached
+  namespace: social-network
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      death-star-project: social-network
+      app-name: post-storage-memcached
+  template:
+    metadata:
+      labels: 
+        death-star-project: social-network
+        app-name: post-storage-memcached
+        INPUT: post-storage-service
+      name: post-storage-memcached
+    spec:
+      containers:
+      - name: post-storage-memcached
+        image: poanpan/memcached:v1
+        resources: 
+          requests: 
+            cpu: "700m"
+            memory: "80Mi"
+      restartPolicy: Always
+      # nodeName: 10.0.0.13
+      # schedulerName: poseidon
