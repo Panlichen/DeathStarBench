@@ -19,6 +19,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: write-home-timeline-service
   labels:
     death-star-project: social-network
@@ -42,12 +44,16 @@ spec:
     spec:
       containers:
       - name: write-home-timeline-service
-        image: poanpan/social-network-microservices:v1
+        image: poanpan/social-network-microservices:local-jaeger
         command: ["WriteHomeTimelineService"]
         resources: 
           requests: 
             cpu: "1300m"
             memory: "13Mi"
+      initContainers:
+      - name: wait-write-home-timeline-rabbitmq
+        image: busybox:1.28
+        command: ['sh', '-c', "until nslookup write-home-timeline-rabbitmq.$(cat /var/run/secrets/kubernetes.io/serviceaccount/namespace).svc.cluster.local; do echo waiting for myservice; sleep 2; done"]
       restartPolicy: Always
       # nodeName: 10.0.0.13
       # TODO: need init-container

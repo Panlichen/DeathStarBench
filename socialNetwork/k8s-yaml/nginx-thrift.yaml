@@ -20,6 +20,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: nginx-thrift
   labels:
     death-star-project: social-network
@@ -51,6 +53,14 @@ spec:
         ports: 
         - containerPort: 8080
         volumeMounts:
+
+        # use pv
+        # - mountPath: /usr/local/openresty/nginx
+        #   name: deathstar-sn-nws-nfs-pvc
+        # - mountPath: /gen-lua
+        #   name: deathstar-sn-gl-nfs-pvc
+
+        # use host-path
         - mountPath: /usr/local/openresty/nginx/lua-scripts
           name: lua-scripts
         - mountPath: /usr/local/openresty/nginx/pages
@@ -61,15 +71,24 @@ spec:
           name: jaeger-config-json
         - mountPath: /gen-lua
           name: gen-lua
-        resources: 
-          requests: 
-            cpu: "10000m"
-            memory: "200Mi"
+        # resources: 
+        #   requests: 
+        #     cpu: "10000m"
+        #     memory: "200Mi"
       restartPolicy: Always
       volumes:
+      # use pv
+      # - name: deathstar-sn-nws-nfs-pvc
+      #   persistentVolumeClaim:
+      #     claimName: deathstar-sn-nws-nfs-pvc
+      # - name: deathstar-sn-gl-nfs-pvc
+      #   persistentVolumeClaim:
+      #     claimName: deathstar-sn-gl-nfs-pvc
+        
+      # use host-path
       - name: lua-scripts
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/nginx-web-server/lua-scripts-k8s
+          path: /root/DeathStarBench/socialNetwork/nginx-web-server/lua-scripts
           type: Directory
       - name: pages
         hostPath: 
@@ -77,7 +96,7 @@ spec:
           type: Directory
       - name: nginx-conf
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/nginx-web-server/conf/nginx-k8s.conf
+          path: /root/DeathStarBench/socialNetwork/nginx-web-server/conf/nginx.conf
           type: File
       - name: jaeger-config-json
         hostPath: 

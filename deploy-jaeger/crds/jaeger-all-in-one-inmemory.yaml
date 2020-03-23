@@ -1,0 +1,19 @@
+apiVersion: jaegertracing.io/v1
+kind: Jaeger
+metadata:
+  name: jaeger-all-in-one-inmemory
+spec:
+  affinity: 
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: "AcceptType"
+            operator: In
+            values:
+            - "SysTool"
+  tolerations:
+    - key: "AcceptType"
+      operator: Equal
+      value: "SysTool"
+      effect: NoSchedule

@@ -1,0 +1,43 @@
+# This mounts the nfs volume claim into /mnt and continuously
+# overwrites /mnt/index.html with the time and hostname of the pod.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nfs-busybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: nfs-busybox
+  template:
+    metadata:
+      labels:
+        name: nfs-busybox
+      name: nfs-busybox
+    spec:
+      containers:
+      - image: busybox
+        command:
+        - sh
+        - -c
+        - 'mkdir -p /usr/local/openresty/nginx && cp /root/DeathStarBench/socialNetwork/nginx-web-server/jaeger-config.json /usr/local/openresty/nginx/jaeger-config.json && while true; do date ; sleep $(($RANDOM % 5 + 5)); done'
+        # - sh
+        # - -c
+        # - 'mkdir -p /usr/local/openresty/nginx'
+        # - sh
+        # - -c
+        # - 'cp /root/DeathStarBench/socialNetwork/nginx-web-server/jaeger-config.json /usr/local/openresty/nginx/jaeger-config.json'
+        imagePullPolicy: IfNotPresent
+        name: busybox
+        volumeMounts:
+          # name must match the volume name below
+        - mountPath: /root/DeathStarBench
+          name: deathstar-nfs
+      volumes:
+      - name: deathstar-nfs
+        persistentVolumeClaim:
+          claimName: deathstar-nfs
+        # hostPath: 
+        #   path: /root/DeathStarBench/socialNetwork/nginx-web-server/jaeger-config.json
+        #   type: File

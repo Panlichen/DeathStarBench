@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: compose-review-service
-        image: poanpan/media-microservices:v1
+        image: poanpan/media-microservices:local-jaeger
         command: ["ComposeReviewService"]
         resources: 
           requests: 

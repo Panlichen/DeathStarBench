@@ -39,7 +39,7 @@ spec:
     spec:
       containers:
       - name: movie-info-service
-        image: poanpan/media-microservices:v1
+        image: poanpan/media-microservices:local-jaeger
         command: ["MovieInfoService"]
         resources: 
           requests: 

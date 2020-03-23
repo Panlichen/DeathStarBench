@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: deathstar-jaegerconfig-nfs
+spec:
+  accessModes:
+  - ReadOnlyMany
+  resources:
+    requests:
+      storage: 1Mi
+  storageClassName: nfs
+  selector:
+    matchLabels:
+      pv: deathstar-jaegerconfig-nfs

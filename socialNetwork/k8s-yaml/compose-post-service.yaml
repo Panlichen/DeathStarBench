@@ -19,6 +19,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: compose-post-service
   labels:
     death-star-project: social-network
@@ -49,7 +51,7 @@ spec:
     spec:
       containers:
       - name: compose-post-service
-        image: poanpan/social-network-microservices:v1
+        image: poanpan/social-network-microservices:local-jaeger
         command: ["ComposePostService"]
         resources: 
           requests: 

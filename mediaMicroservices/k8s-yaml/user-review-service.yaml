@@ -40,7 +40,7 @@ spec:
     spec:
       containers:
       - name: user-review-service
-        image: poanpan/media-microservices:v1
+        image: poanpan/media-microservices:local-jaeger
         command: ["UserReviewService"]
         resources: 
           requests: 

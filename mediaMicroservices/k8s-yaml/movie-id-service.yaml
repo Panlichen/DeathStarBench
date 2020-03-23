@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: movie-id-service
-        image: poanpan/media-microservices:v1
+        image: poanpan/media-microservices:local-jaeger
         command: ["MovieIdService"]
         resources: 
           requests: 

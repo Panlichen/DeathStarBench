@@ -20,6 +20,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: media-frontend
   labels:
     death-star-project: social-network
@@ -44,6 +46,11 @@ spec:
         ports: 
         - containerPort: 8080
         volumeMounts:
+        # use pv
+        # - mountPath: /usr/local/openresty/nginx
+        #   name: deathstar-sn-mf-nfs-pvc
+
+        # use host-path
         - mountPath: /usr/local/openresty/nginx/lua-scripts
           name: lua-scripts
         - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
@@ -54,13 +61,19 @@ spec:
             memory: "20Mi"
       restartPolicy: Always
       volumes:
+      # use pv
+      # - name: deathstar-sn-mf-nfs-pvc
+      #   persistentVolumeClaim:
+      #     claimName: deathstar-sn-mf-nfs-pvc
+        
+      # use host-path
       - name: lua-scripts
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/media-frontend/lua-scripts-k8s
+          path: /root/DeathStarBench/socialNetwork/media-frontend/lua-scripts
           type: Directory
       - name: nginx-conf
         hostPath: 
-          path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx-k8s.conf
+          path: /root/DeathStarBench/socialNetwork/media-frontend/conf/nginx.conf
           type: File
       # nodeName: 10.0.0.13
       # schedulerName: poseidon

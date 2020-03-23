@@ -17,6 +17,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: social-graph-service
   labels:
     death-star-project: social-network
@@ -44,7 +46,7 @@ spec:
     spec:
       containers:
       - name: social-graph-service
-        image: poanpan/social-network-microservices:v1
+        image: poanpan/social-network-microservices:local-jaeger
         command: ["SocialGraphService"]
         resources: 
           requests: 
