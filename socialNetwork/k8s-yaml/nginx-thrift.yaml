@@ -61,6 +61,8 @@ spec:
         - mountPath: /usr/local/openresty/nginx/pages
           name: deathstar-sn-nws-nfs-pvc
           subPath: pages
+        # TODO: ConfigMap is more suitable for config files. 
+        # Maybe we can change config WITHOUT stopping service
         - mountPath: /usr/local/openresty/nginx/conf/nginx.conf
           name: deathstar-sn-nws-nfs-pvc
           subPath: conf/nginx-k8s.conf
