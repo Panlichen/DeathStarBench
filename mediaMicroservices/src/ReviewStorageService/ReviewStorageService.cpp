@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
   init_logger();
 
-  SetUpTracer("config/jaeger-config.yml", "review-storage-service");
+  SetUpTracer("config/jaeger-config.yml", "me-review-storage-service");
 
   json config_json;
   if (load_config_file("config/service-config.json", &config_json) != 0) {

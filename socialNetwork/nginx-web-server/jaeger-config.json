@@ -1,6 +1,6 @@
 {
-  "service_name": "nginx-web-server",
-  "diabled": false,
+  "service_name": "sn-nginx",
+  "disabled": false,
   "reporter": {
     "logSpans": true,
     "localAgentHostPort": "127.0.0.1:6831"

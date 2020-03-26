@@ -34,7 +34,7 @@ void sigintHandler(int sig) {
 int main(int argc, char *argv[]) {
   signal(SIGINT, sigintHandler);
   init_logger();
-  SetUpTracer("config/jaeger-config.yml", "unique-id-service");
+  SetUpTracer("config/jaeger-config.yml", "sn-unique-id-service");
 
   json config_json;
   if (load_config_file("config/service-config.json", &config_json) != 0) {

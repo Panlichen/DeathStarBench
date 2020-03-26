@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: url-shorten-service
-        image: poanpan/social-network-microservices:local-jaeger
+        image: poanpan/social-network-microservices-local-jaeger:v0.0.1
         command: ["UrlShortenService"]
         resources: 
           requests: 

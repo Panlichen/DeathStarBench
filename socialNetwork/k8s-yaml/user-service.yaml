@@ -45,7 +45,7 @@ spec:
     spec:
       containers:
       - name: user-service
-        image: poanpan/social-network-microservices:local-jaeger
+        image: poanpan/social-network-microservices-local-jaeger:v0.0.1
         command: ["UserService"]
         resources: 
           requests: 

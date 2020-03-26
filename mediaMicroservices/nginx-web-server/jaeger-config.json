@@ -1,5 +1,5 @@
 {
-  "service_name": "nginx",
+  "service_name": "me-nginx",
   "diabled": false,
   "reporter": {
     "logSpans": true,

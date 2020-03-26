@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
   signal(SIGINT, sigintHandler);
   init_logger();
 
-  SetUpTracer("config/jaeger-config.yml", "user-service");
+  SetUpTracer("config/jaeger-config.yml", "me-user-service");
 
   json config_json;
   if (load_config_file("config/service-config.json", &config_json) != 0) {

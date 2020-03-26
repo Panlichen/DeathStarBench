@@ -43,7 +43,7 @@ spec:
     spec:
       containers:
       - name: user-mention-service
-        image: poanpan/social-network-microservices:local-jaeger
+        image: poanpan/social-network-microservices-local-jaeger:v0.0.1
         command: ["UserMentionService"]
         resources: 
           requests: 
