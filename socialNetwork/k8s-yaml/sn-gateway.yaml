@@ -1,0 +1,177 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: sn-gateway
+  namespace: social-network
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "./*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: sn-nginx
+  namespace: social-network
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - sn-gateway
+  http:
+  - match:
+    - uri:
+        exact: /sn-nginx
+    rewrite:
+      uri: "/"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/user/register
+    rewrite:
+      uri: "/api/user/register"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/user/follow
+    rewrite:
+      uri: "/api/user/follow"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/user/unfollow
+    rewrite:
+      uri: "/api/user/unfollow"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/user/login
+    rewrite:
+      uri: "/api/user/login"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/post/compose
+    rewrite:
+      uri: "/api/post/compose"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/user-timeline/read
+    rewrite:
+      uri: "/api/user-timeline/read"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/api/home-timeline/read
+    rewrite:
+      uri: "/api/home-timeline/read"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/user/register
+    rewrite:
+      uri: "/wrk2-api/user/register"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/user/follow
+    rewrite:
+      uri: "/wrk2-api/user/follow"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/user/unfollow
+    rewrite:
+      uri: "/wrk2-api/user/unfollow"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/user/login
+    rewrite:
+      uri: "/wrk2-api/user/login"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/post/compose
+    rewrite:
+      uri: "/wrk2-api/post/compose"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/user-timeline/read
+    rewrite:
+      uri: "/wrk2-api/user-timeline/read"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080
+  - match:
+    - uri:
+        exact: /sn-nginx/wrk2-api/home-timeline/read
+    rewrite:
+      uri: "/wrk2-api/home-timeline/read"
+    route:
+    - destination:
+        host: nginx-thrift.social-network.svc.cluster.local
+        port:
+          number: 8080

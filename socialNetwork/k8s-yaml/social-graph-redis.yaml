@@ -10,6 +10,7 @@ metadata:
 spec:
   ports:
   - port: 6379
+    name: redis
   selector:
     death-star-project: social-network
     app-name: social-graph-redis
@@ -17,8 +18,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    "sidecar.jaegertracing.io/inject": "true"
+    #annotations:
+    #"sidecar.jaegertracing.io/inject": "true"
   name: social-graph-redis
   labels:
     death-star-project: social-network

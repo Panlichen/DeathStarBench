@@ -10,13 +10,13 @@ metadata:
 spec:
   ports:
   - port: 4369
-    name: tcp1
+    name: tcp-1
   - port: 5671
-    name: tcp2
+    name: tcp-2
   - port: 5672
-    name: tcp3
+    name: tcp-3
   - port: 25672
-    name: tcp4
+    name: tcp-4
   selector:
     death-star-project: social-network
     app-name: write-home-timeline-rabbitmq
@@ -24,8 +24,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    "sidecar.jaegertracing.io/inject": "true"
+    #annotations:
+    #"sidecar.jaegertracing.io/inject": "true"
   name: write-home-timeline-rabbitmq
   labels:
     death-star-project: social-network

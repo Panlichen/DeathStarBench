@@ -96,7 +96,7 @@ if __name__ == '__main__':
   parser.add_argument("-m", "--movie", action="store", dest="movie_filename",
     type=str, default="/home1/root/DeathStarBench/mediaMicroservices/datasets/tmdb/movies.json")
   parser.add_argument("--server_address", action="store", dest="server_address",
-    type=str, default="http://10.0.0.252:32000",
+    type=str, default="http://10.0.0.252:31011/media-nginx",
     help="The address of the server. If running outside of docker you should use 8082 as the port. "
          "This parameter must be changed because it only fits a specific environment")
   args = parser.parse_args()

@@ -1,0 +1,51 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: perf-sidecar-injector-webhook-deployment
+  labels:
+    app: perf-sidecar-injector
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: perf-sidecar-injector
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: "AcceptType"
+                operator: In
+                values:
+                - "SysTool"
+      tolerations:
+        - key: "AcceptType"
+          operator: Equal
+          value: "SysTool"
+          effect: NoSchedule
+      containers:
+        - name: perf-sidecar-injector
+          image: bpradipt/perf-sidecar-injector:v1
+          imagePullPolicy: IfNotPresent
+          args:
+            - -sidecarCfgFile=/etc/webhook/config/sidecarconfig.yaml
+            - -tlsCertFile=/etc/webhook/certs/cert.pem
+            - -tlsKeyFile=/etc/webhook/certs/key.pem
+            - -alsologtostderr
+            - -v=4
+            - 2>&1
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /etc/webhook/certs
+              readOnly: true
+            - name: webhook-config
+              mountPath: /etc/webhook/config
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: perf-sidecar-injector-webhook-certs
+        - name: webhook-config
+          configMap:
+            name: perf-sidecar-injector-webhook-configmap

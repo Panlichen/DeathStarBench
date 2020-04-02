@@ -45,6 +45,10 @@ func findTraces(ctx context.Context, qsClient jaeger_pb.QueryServiceClient) {
 			fmt.Printf("\t=SpanRef #%v= TraceID: (%v, %v); SpanID: %v; SpanRefType: %v\n",
 				j, spanRef.TraceID.High, spanRef.TraceID.Low, spanRef.SpanID, spanRef.RefType)
 		}
+		for j, pTag := range span.Process.GetTags() {
+			fmt.Printf("\t~pTag #%v~ %v = %v;\n",
+				j, pTag.Key, pTag.VStr)
+		}
 		println()
 	}
 	// }
@@ -53,8 +57,10 @@ func findTraces(ctx context.Context, qsClient jaeger_pb.QueryServiceClient) {
 
 func main() {
 	log.Println("begin")
-	// conn, err := grpc.Dial("10.0.0.252:31010", grpc.WithInsecure())
-	conn, err := grpc.Dial("10.68.241.59:16686", grpc.WithInsecure())
+	// conn, err := grpc.Dial("10.68.229.36:80", grpc.WithInsecure())
+	conn, err := grpc.Dial("10.0.0.252:31010", grpc.WithInsecure())
+	// conn, err := grpc.Dial("172.20.232.17:16686", grpc.WithInsecure())
+	// conn, err := grpc.Dial("10.68.241.59:16686", grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

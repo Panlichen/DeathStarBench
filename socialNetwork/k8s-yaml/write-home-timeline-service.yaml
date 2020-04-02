@@ -12,6 +12,7 @@ metadata:
 spec:
   ports:
   - port: 9090
+    name: http
   selector:
     death-star-project: social-network
     app-name: write-home-timeline-service
@@ -19,8 +20,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    "sidecar.jaegertracing.io/inject": "true"
+    #annotations:
+    #"sidecar.jaegertracing.io/inject": "true"
   name: write-home-timeline-service
   labels:
     death-star-project: social-network
