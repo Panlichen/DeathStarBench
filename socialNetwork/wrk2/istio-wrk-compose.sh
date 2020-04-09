@@ -1,0 +1,1 @@
+./wrk -D exp -t 2 -c 4 -d 30s -L -s ./scripts/social-network/compose-post.lua http://10.0.0.252:31011/sn-nginx/wrk2-api/post/compose -R 20

@@ -69,8 +69,8 @@ if __name__ == '__main__':
     edges = getEdges(file)
 
   # Use your cluster-ip here:
-  addr = "http://10.0.0.252:31011/sn-nginx"
-  # addr = "http://10.0.0.252:31000"
+  # addr = "http://10.0.0.252:31011/sn-nginx"
+  addr = "http://10.0.0.252:31000"
   loop = asyncio.get_event_loop()
   future = asyncio.ensure_future(register(addr, nodes))
   loop.run_until_complete(future)

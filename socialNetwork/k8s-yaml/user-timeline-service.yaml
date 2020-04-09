@@ -10,7 +10,7 @@ metadata:
 spec:
   ports:
   - port: 9090
-    name: http
+    name: tcp
   selector:
     death-star-project: social-network
     app-name: user-timeline-service
