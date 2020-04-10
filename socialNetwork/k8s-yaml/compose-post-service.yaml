@@ -20,8 +20,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    #annotations:
-    #"sidecar.jaegertracing.io/inject": "true"
+  annotations:
+    "sidecar.jaegertracing.io/inject": "true"
   name: compose-post-service
   labels:
     death-star-project: social-network

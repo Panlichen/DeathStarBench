@@ -427,10 +427,10 @@ spec:
         imagePullPolicy: IfNotPresent
         livenessProbe:
           exec:
-            command: ["curl", "-sS", "--fail", "--connect-timeout", "5", "-o", "/dev/null", "kubernetes.default.svc.cluster.local"]
+            command: ["curl", "-sS", "--fail", "--connect-timeout", "5", "-o", "/dev/null", "www.weibo.com"]
         readinessProbe:
           exec:
-            command: ["curl", "-sS", "--fail", "--connect-timeout", "5", "-o", "/dev/null", "kubernetes.default.svc.cluster.local"]
+            command: ["curl", "-sS", "--fail", "--connect-timeout", "5", "-o", "/dev/null", "www.weibo.com"]
 ---
 apiVersion: "cilium.io/v2"
 kind: CiliumNetworkPolicy
@@ -464,5 +464,5 @@ spec:
         dns:
         - matchPattern: "*"
   - toFQDNs:
-    - matchPattern: "*.google.com"
+    - matchPattern: "*.weibo.com"
 ---
