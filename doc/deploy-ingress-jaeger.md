@@ -1,19 +1,9 @@
-# Deploy ingress
-
-Refer to [here](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md#bare-metal).
-
-1. Deploy Mandatory stuffs:
-
-   `kubectl apply -f deploy-ingress/static/mandatory.yaml`
-
-2. Deploy nodePort service:
-
-   `kubectl apply -f deploy-ingress/baremetal/service-nodeport.yaml`
-
-   > Before this, may need to configure `spec.ports[0].nodePort` in `deploy-ingress/baremetal/service-nodeport.yaml`
-
-   > Need to configure `spec.selector` or define `Endpoint` object.(refer to [here](https://kubernetes.io/zh/docs/concepts/services-networking/service/#services-without-selectors))
-
+---
+note:
+    createdAt: 2020-03-30T07:46:25.854Z
+    modifiedAt: 2020-04-13T12:00:41.084Z
+    tags: []
+---
 # Deploy jaeger
 
 Refer to [here](https://www.jaegertracing.io/docs/1.17/operator/).
@@ -51,3 +41,18 @@ kubectl apply -f deploy-jaeger/crds/jaeger-all-in-one-inmemory.yaml
 - [Deployment Strategies](https://www.jaegertracing.io/docs/1.17/operator/#deployment-strategies)
 - [Storage options](https://www.jaegertracing.io/docs/1.17/operator/#storage-options)
 
+# Deploy ingress--not necessary
+
+Refer to [here](https://github.com/kubernetes/ingress-nginx/blob/master/docs/deploy/index.md#bare-metal).
+
+1. Deploy Mandatory stuffs:
+
+   `kubectl apply -f deploy-ingress/static/mandatory.yaml`
+
+2. Deploy nodePort service:
+
+   `kubectl apply -f deploy-ingress/baremetal/service-nodeport.yaml`
+
+   > Before this, may need to configure `spec.ports[0].nodePort` in `deploy-ingress/baremetal/service-nodeport.yaml`
+
+   > Need to configure `spec.selector` or define `Endpoint` object.(refer to [here](https://kubernetes.io/zh/docs/concepts/services-networking/service/#services-without-selectors))

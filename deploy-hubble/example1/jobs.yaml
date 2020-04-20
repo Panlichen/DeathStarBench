@@ -1,0 +1,378 @@
+####
+# Demo app services, deployments and docker credentials
+####
+---
+apiVersion: v1
+data:
+  .dockerconfigjson: ewogICJhdXRocyI6IHsKICAgICJxdWF5LmlvIjogewogICAgICAiYXV0aCI6ICJZMjkyWVd4bGJuUXJZM1Z6ZEc5dFpYSnpPbEJWVEZORFYxUldVa3MzT0VFMFdqY3lSRFk1V1ROR05qVlBSalZJTWt0VVJVVXhXVGxDU0RCWU9WRTNTVkpLVGpCU1FqSkxNa2hSTURWRVJFWklORFU9IiwKICAgICAgImVtYWlsIjogIiIKICAgIH0KICB9Cn0=
+kind: Secret
+metadata:
+  name: covalent-customers-pull-secret
+type: kubernetes.io/dockerconfigjson
+---
+# Jobposting service
+apiVersion: v1
+kind: Service
+metadata:
+  name: jobposting
+  labels:
+    app: jobposting
+spec:
+  ports:
+    - port: 9080
+      name: http
+  selector:
+    app: jobposting
+---
+# Jobposting deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobposting
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jobposting
+  template:
+    metadata:
+      labels:
+        app: jobposting
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>,<Ingress/9080/TCP/HTTP>"
+    spec:
+      containers:
+        - name: jobposting
+          image: quay.io/covalent/demo-jobposting:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080
+          env:
+            - name: API_ENDPOINT
+              value: "http://coreapi:9080/"
+            - name: PORT
+              value: "9080"
+            - name: ES_ENDPOINT
+              value: "http://elastic:changeme@elasticsearch:9200/"
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+# Recruiter service
+apiVersion: v1
+kind: Service
+metadata:
+  name: recruiter
+  labels:
+    app: recruiter
+spec:
+  ports:
+    - port: 9080
+      name: http
+  selector:
+    app: recruiter
+---
+# Recruiter deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recruiter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recruiter
+  template:
+    metadata:
+      labels:
+        app: recruiter
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>,<Ingress/9080/TCP/HTTP>"
+    spec:
+      containers:
+        - name: recruiter
+          image: quay.io/covalent/demo-recruiter:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080
+          env:
+            - name: API_ENDPOINT
+              value: "http://coreapi:9080/"
+            - name: PORT
+              value: "9080"
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+
+---
+# Coreapi service
+apiVersion: v1
+kind: Service
+metadata:
+  name: coreapi
+  labels:
+    app: coreapi
+spec:
+  ports:
+    - name: "http"
+      protocol: TCP
+      port: 9080
+      targetPort: 9080
+  selector:
+    app: coreapi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coreapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coreapi
+  template:
+    metadata:
+      labels:
+        app: coreapi
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>,<Ingress/9080/TCP/HTTP>"
+    spec:
+      containers:
+        - name: coreapi
+          image: quay.io/covalent/demo-coreapi:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080
+          env:
+            - name: ES_ENDPOINT
+              value: "http://elastic:changeme@elasticsearch:9200/"
+            - name: PORT
+              value: "9080"
+            - name: BOOTSTRAP
+              value: "true"
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 9080
+            initialDelaySeconds: 10
+            periodSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 9080
+            initialDelaySeconds: 10
+            periodSeconds: 3
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+# Elasticsearch service
+apiVersion: v1
+kind: Service
+metadata:
+  name: elasticsearch
+  labels:
+    app: elasticsearch
+spec:
+  ports:
+    - port: 9200
+      name: http
+  selector:
+    app: elasticsearch
+---
+# Elasticsearch deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: elasticsearch
+  template:
+    metadata:
+      labels:
+        app: elasticsearch
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>,<Ingress/9200/TCP/HTTP>"
+    spec:
+      containers:
+        - name: elasticsearch
+          image: quay.io/covalent/demo-elasticsearch:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9200
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-config
+data:
+  standalone.id: "kafka-0"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka-headless
+spec:
+  ports:
+    - port: 9092
+      name: client
+  clusterIP: None
+  selector:
+    app: kafka
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+spec:
+  serviceName: kafka-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>"
+    spec:
+      containers:
+        - name: kafka
+          image: quay.io/covalent/docker-kafka
+          ports:
+            - containerPort: 9092
+              name: client
+          env:
+            - name: SERVER_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: kafka-config
+                  key: standalone.id
+            - name: MAX_SERVERS
+              value: "1"
+            - name: K8S_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: zookeeper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: zookeeper
+  template:
+    metadata:
+      labels:
+        app: zookeeper
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>"
+    spec:
+      containers:
+        - name: zookeeper
+          image: quay.io/covalent/demo-zookeeper:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 2181
+              name: client
+            - containerPort: 2888
+              name: server
+            - containerPort: 3888
+              name: leader-election
+          env:
+            - name: SERVER_ID
+              value: "0"
+            - name: MAX_SERVERS
+              value: "1"
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zk-headless
+spec:
+  ports:
+    - port: 2181
+      name: client
+    - port: 2888
+      name: server
+    - port: 3888
+      name: leader-election
+  clusterIP: None
+  selector:
+    app: zookeeper
+---
+# loader service
+apiVersion: v1
+kind: Service
+metadata:
+  name: loader
+  labels:
+    app: loader
+spec:
+  ports:
+    - port: 50051
+      name: grpc
+  selector:
+    app: loader
+---
+# Loader deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: loader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: loader
+  template:
+    metadata:
+      labels:
+        app: loader
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>,<Ingress/50051/TCP/HTTP>"
+    spec:
+      containers:
+        - name: loader
+          image: quay.io/covalent/demo-loader:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 50051
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret
+---
+# crawler deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      labels:
+        app: crawler
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/53/UDP/DNS>"
+    spec:
+      containers:
+        - name: crawler
+          image: quay.io/covalent/demo-grpc_client:v1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080
+      imagePullSecrets:
+        - name: covalent-customers-pull-secret

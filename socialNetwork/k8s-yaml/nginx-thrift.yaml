@@ -36,6 +36,9 @@ spec:
       app-name: nginx-thrift
   template:
     metadata:
+      annotations:
+        io.cilium.proxy-visibility: "<Egress/9090/TCP/HTTP>,<Egress/6379/TCP/REDIS>,<Egress/11211/TCP/MEMCACHED>,<Egress/27107/TCP/MONGODB>,<Egress/5672/TCP/RABBITMQ>,<Ingress/9090/TCP/HTTP>,<Ingress/6379/TCP/REDIS>,<Ingress/11211/TCP/MEMCACHED>,<Ingress/27017/TCP/MONGODB>,<Ingress/5672/TCP/RABBITMQ>"
+
       labels: 
         death-star-project: social-network
         app-name: nginx-thrift
