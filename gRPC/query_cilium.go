@@ -20,7 +20,7 @@ type forwardCnt struct {
 	egressValueDelta  int64
 }
 
-func getforwardCnt() {
+func getForwardCnt() {
 	forwardCntMap := make(map[string]*forwardCnt)
 
 	for {
@@ -87,7 +87,19 @@ func getforwardCnt() {
 	}
 }
 
+func getHubbleFlow() {
+	resp, err := http.Get(`http://10.0.0.252:39000/api/v1/query?query=hubble_port_distribution_total`)
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		// handle error
+	}
+	// err = ioutil.WriteFile("/home1/root/DeathStarBench/gRPC/out.json", body, 0644)
+	fmt.Println(len(string(body)))
+}
+
 func main() {
 	log.Println("begin")
-	getforwardCnt()
+	// getForwardCnt()
+	getHubbleFlow()
 }

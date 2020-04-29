@@ -179,11 +179,10 @@ spec:
         - --listen-client-urls=unix:///var/run/hubble.sock
         - --metrics-server
         - ":6943"
-        - --metric=dns:query;ignoreAAAA;destinationContext=pod-short
-        - --metric=drop:sourceContext=pod;destinationContext=pod
+        - --metric=dns:query;ignoreAAAA
         - --metric=tcp
-        - --metric=flow
-        - --metric=port-distribution
+        - --metric=flow:destinationContext=pod-short;sourceContext=pod-short
+        - --metric=port-distribution:destinationContext=pod-short;sourceContext=pod-short
         - --metric=icmp
         - --metric=http
         env:

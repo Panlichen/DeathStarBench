@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: nginx-thrift
+  namespace: social-network
+spec:
+  rules:
+  - host: sn-nginx.test.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nginx-thrift
+          servicePort: 8080
+  
