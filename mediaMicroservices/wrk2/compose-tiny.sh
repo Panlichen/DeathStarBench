@@ -1,0 +1,1 @@
+./wrk -D exp -t 2 -c 4 -d 30s -L -s ./scripts/media-microservices/compose-review-tiny.lua http://media-nginx.test.com/wrk2-api/review/compose -R 200

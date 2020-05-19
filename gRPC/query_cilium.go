@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"regexp"
 	"strings"
 	"time"
 
@@ -18,6 +19,12 @@ type forwardCnt struct {
 	egressValueNew    int64
 	ingressValueDelta int64
 	egressValueDelta  int64
+}
+
+var shortPodPattern = regexp.MustCompile("^(.+?)(-[a-z0-9]+){1,2}$")
+
+func shortenPodName(name string) string {
+	return shortPodPattern.ReplaceAllString(name, "${1}")
 }
 
 func getForwardCnt() {

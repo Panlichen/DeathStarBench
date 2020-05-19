@@ -431,7 +431,7 @@ request = function()
   local rating = math.random(0, 10)
   local text = string.random(256)
 
-  local path = "http://10.0.0.252:32000/wrk2-api/review/compose"
+  local path = "http://media-nginx.test.com/wrk2-api/review/compose"
   local method = "POST"
   local headers = {}
   local body = "username=" .. username .. "&password=" .. password .. "&title=" ..

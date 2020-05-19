@@ -181,8 +181,8 @@ spec:
         - ":6943"
         - --metric=dns:query;ignoreAAAA
         - --metric=tcp
-        - --metric=flow:destinationContext=pod-short;sourceContext=pod-short
-        - --metric=port-distribution:destinationContext=pod-short;sourceContext=pod-short
+        - --metric=flow:destinationContext=pod;sourceContext=pod
+        - --metric=port-distribution:destinationContext=pod;sourceContext=pod
         - --metric=icmp
         - --metric=http
         env:
@@ -250,8 +250,8 @@ spec:
           operator: Equal
           value: "SysTool"
           effect: NoSchedule
-      nodeSelector: 
-        kubernetes.io/hostname: 10.0.0.252
+      # nodeSelector: 
+      #   kubernetes.io/hostname: 10.0.0.252
       priorityClassName: 
       serviceAccountName: hubble-ui
       containers:

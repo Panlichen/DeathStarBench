@@ -20,8 +20,8 @@ spec:
           operator: Equal
           value: "SysTool"
           effect: NoSchedule
-      nodeSelector: 
-        kubernetes.io/hostname: 10.0.0.252
+      # nodeSelector: 
+      #   kubernetes.io/hostname: 10.0.0.252
       {{- if and .Values.priorityClassName (eq .Release.Namespace "kube-system") }}
       priorityClassName: {{ .Values.ui.priorityClassName }}
       {{- end }}

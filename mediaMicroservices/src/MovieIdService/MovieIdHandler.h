@@ -216,6 +216,7 @@ void MovieIdHandler::UploadMovieId(
     }
     auto compose_client = compose_client_wrapper->GetClient();
     try {
+      // span.SetTag("UploadMovieIdCallTime", std::chrono::now());
       compose_client->UploadMovieId(req_id, movie_id_str, writer_text_map);
     } catch (...) {
       _compose_client_pool->Push(compose_client_wrapper);
