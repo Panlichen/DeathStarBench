@@ -64,7 +64,7 @@ request = function()
   local method = "POST"
   -- Use your cluster-ip here:
   -- local path = "http://10.0.0.252:31011/sn-nginx/wrk2-api/post/compose"
-  local path = "http://10.0.0.252:31000/wrk2-api/post/compose"
+  local path = "http://sn-nginx.test.com/wrk2-api/post/compose"
   local headers = {}
   local body
   headers["Content-Type"] = "application/x-www-form-urlencoded"
