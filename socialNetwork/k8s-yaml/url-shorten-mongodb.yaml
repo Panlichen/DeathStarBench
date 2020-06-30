@@ -48,7 +48,7 @@ spec:
         resources: 
           requests: 
             cpu: "700m"
-            memory: "3.2Gi"
+            memory: "3200Mi"
       restartPolicy: Always
       # nodeName: 10.0.0.13
       # schedulerName: poseidon
