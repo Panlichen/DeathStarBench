@@ -3,6 +3,8 @@ kind: Jaeger
 metadata:
   name: jaeger-all-in-one-inmemory
 spec:
+  annotations:
+    handsome: "yes"
   ingress:
     hosts:
     - "jaeger.test.com"

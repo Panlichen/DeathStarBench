@@ -6,8 +6,6 @@ metadata:
 spec:
   strategy: production
   storage:
-    type: elasticsearch
-    options:
-      es:
-        # Note: This assumes elasticsearch is running in the "default" namespace.
-        server-urls: http://elasticsearch.default.svc:9200
+    type: memory
+  # ingress:
+  #   enabled: false

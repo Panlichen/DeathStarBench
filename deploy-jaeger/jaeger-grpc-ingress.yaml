@@ -1,0 +1,16 @@
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jaeger-grpc
+  annotations:
+    ingress.kubernetes.io/protocol: h2c
+spec:
+  rules:
+  - host: jaeger-grpc.test.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jaeger-all-in-one-inmemory-query
+          servicePort: 16686
