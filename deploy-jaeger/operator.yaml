@@ -38,7 +38,7 @@ spec:
         - name: OPERATOR_NAME
           value: "jaeger-operator"
 
-      # nodeSelector:
+      nodeSelector:
       #   AcceptType: SysTool
       tolerations:
       - key: AcceptType

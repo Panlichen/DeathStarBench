@@ -3,11 +3,20 @@ kind: Jaeger
 metadata:
   name: jaeger-all-in-one-inmemory
 spec:
-  annotations:
-    handsome: "yes"
   ingress:
     hosts:
     - "jaeger.test.com"
+  # sampling:
+  #   options:
+  #     default_strategy:
+  #       # type: ratelimiting
+  #       # param: 2000
+  #       type: const
+  #       param: 1
+  #     service_strategies:
+  #     - service: "jaeger-query"
+  #       type: probabilistic
+  #       param: 0.0
   # affinity: 
   #   nodeAffinity:
   #     requiredDuringSchedulingIgnoredDuringExecution:
@@ -22,3 +31,19 @@ spec:
   #     operator: Equal
   #     value: "SysTool"
   #     effect: NoSchedule
+---
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: jaeger-grpc
+  annotations:
+    ingress.kubernetes.io/protocol: h2c
+spec:
+  rules:
+  - host: jaeger-grpc.test.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: jaeger-all-in-one-inmemory-query
+          servicePort: 16686
