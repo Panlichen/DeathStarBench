@@ -251,7 +251,7 @@ spec:
           value: "SysTool"
           effect: NoSchedule
       nodeSelector: 
-      node.life: longlive
+        node.life: longlive
       priorityClassName: 
       serviceAccountName: hubble-ui
       containers:

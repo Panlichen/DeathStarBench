@@ -21,7 +21,7 @@ spec:
           value: "SysTool"
           effect: NoSchedule
       nodeSelector: 
-      node.life: longlive
+        node.life: longlive
       {{- if and .Values.priorityClassName (eq .Release.Namespace "kube-system") }}
       priorityClassName: {{ .Values.ui.priorityClassName }}
       {{- end }}
